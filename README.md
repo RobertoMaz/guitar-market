@@ -1,7 +1,5 @@
-# Vue 3 + Vite
+# Proyecto Guitar Market
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+Este proyecto es una aplicacion web para comprar guitarras, tiene varias funcionalidades que puse en practica. Tales como tener componentes que son reutilizables, tambien manejamos la memoria del localstorage de los navegadores para guardar informacion relevante para la web y muchas otras funcionalidades mas que van a poder ver si visitan el proyecto.
 
-## Recommended IDE Setup
-
-- [VS Code](https://code.visualstudio.com/) + [Vue - Official](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (previously Volar) and disable Vetur
+Espero que lo disfruten tanto como yo disfrute al desarrollarlo mediante la ayuda de cursos.
