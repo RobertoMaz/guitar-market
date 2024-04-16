@@ -26,13 +26,15 @@
             carrito.value.push(guitarra)
         }
     }
-
-    const decrementar = () => {
-        console.log("restar")
+    
+    const decrementar = (id) => {
+        const existeProducto = carrito.value.findIndex( producto => producto.id === id)
+        console.log(id)
     }
     
-    const incrementar = () => {
-        console.log("sumar")
+    const incrementar = (id) => {
+        const existeProducto = carrito.value.findIndex( producto => producto.id === id)
+        console.log(id)
         
     }
 
