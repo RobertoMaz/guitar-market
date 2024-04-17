@@ -1,65 +1,91 @@
 <script setup>
-    import {ref, reactive, onMounted} from 'vue'
+    import {ref, reactive, onMounted, watch} from 'vue'
     import {db} from './data/guitar'
     import Guitar from './components/Guitar.vue'
     import Header from './components/Header.vue'
     import Footer from './components/Footer.vue'
 
-    // const state = reactive({
-    //     guitar: db
-    // })
-
     const guitars = ref([])
-    const carrito = ref([])
+    const cart = ref([])
+    const guitarMain = ref({})
 
+    watch(cart, () => {
+        saveLocalStorage()
+    }, {
+        deep: true
+    })
+    
     onMounted(() => {
         guitars.value = db
-    })
-
-    const agregarCarrito = (guitarra) => {
-        const existeProducto = carrito.value.findIndex( producto => producto.id === guitarra.id)
+        guitarMain.value = db[3]
         
-        if(existeProducto >= 0){
-            carrito.value[existeProducto].cantidad++
+        const cartStorage = localStorage.getItem('cart')
+
+        if(cartStorage){
+            cart.value = JSON.parse(cartStorage)
+        }
+    })
+    
+    const addCart = (guitar) => {
+        const existProduct = cart.value.findIndex( product => product.id === guitar.id)
+        if(cart.value[existProduct]?.quantity >= 5) return
+        
+        if(existProduct >= 0){
+            cart.value[existProduct].quantity++
         } else {
-            guitarra.cantidad = 1
-            carrito.value.push(guitarra)
+            guitar.quantity = 1
+            cart.value.push(guitar)
         }
     }
     
-    const decrementar = (id) => {
-        const existeProducto = carrito.value.findIndex( producto => producto.id === id)
-        console.log(id)
+    const clearCart = () => {
+        cart.value = []
     }
     
-    const incrementar = (id) => {
-        const existeProducto = carrito.value.findIndex( producto => producto.id === id)
-        console.log(id)
-        
+    const decrement = (id) => {
+        const index = cart.value.findIndex( product => product.id === id)
+        if(cart.value[index].quantity <= 1) return
+        cart.value[index].quantity--
     }
 
+    const deleteProduct = (id) => {
+        cart.value = cart.value.filter(product => product.id !== id)
+    }
+
+    
+    const increment = (id) => {
+        const index = cart.value.findIndex( product => product.id === id)
+        if(cart.value[index].quantity >= 5) return
+        cart.value[index].quantity++     
+    }
+    
+    const saveLocalStorage = () => {
+        localStorage.setItem('cart', JSON.stringify(cart.value))
+    }
 
 </script>
 
 <template>
     <div>
         <Header 
-            :carrito="carrito"
-            @incrementar-cantidad="incrementar"
-            @decrementar-cantidad="decrementar"
+            :cart="cart"
+            :guitarMain="guitarMain"
+            @increment-quantity="increment"
+            @decrement-quantity="decrement"
+            @add-cart="addCart"
+            @delete-product="deleteProduct"
+            @clear-cart="clearCart"
         />
         <main class="container-xl mt-5">
             <h2 class="text-center">Nuestra Colección</h2>
-
             <div class="row mt-5">
-            <Guitar 
+                <Guitar 
                     v-for="guitar in guitars"
                     :key="guitar.id"
                     :guitar="guitar"
-                    @agregar-carrito="agregarCarrito"
-            />
-            </div>
-                
+                    @add-cart="addCart"
+                />
+            </div>      
         </main>
         <Footer />
     </div>

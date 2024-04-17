@@ -162,10 +162,18 @@ body {
 
 h1, .h1 {
   font-size: calc(1.565rem + 3.78vw);
+  font-family: "Latin Modern Roman";
+  font-style: italic;
+  color: #cec1ac;
 }
 @media (min-width: 1200px) {
   h1, .h1 {
     font-size: 4.4rem;
+  }
+
+  .carrito{
+    left: 60px;
+
   }
 }
 
@@ -298,7 +306,7 @@ button:not(:disabled),
   font: inherit;
   -webkit-appearance: button;
 }
-
+g-f
 .display-2 {
   font-size: calc(1.575rem + 3.9vw);
   font-weight: 300;
@@ -313,6 +321,7 @@ button:not(:disabled),
 .img-fluid {
   max-width: 100%;
   height: auto;
+  align-items: end;
 }
 
 
