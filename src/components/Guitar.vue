@@ -1,4 +1,5 @@
 <script setup>
+    import { formatQuantity} from '../helpers'
 
     const props = defineProps({
         guitar:{
@@ -18,7 +19,7 @@
         <div class="col-8">
             <h3 class="text-black fs-4 fw-bold text-uppercase">{{ guitar.name }}</h3>
             <p>{{ guitar.description }}</p>
-            <p class="fw-black text-primary fs-3">${{ guitar.price }}</p>
+            <p class="fw-black text-primary fs-4">{{ formatQuantity(guitar.price) }}</p>
             <button 
                 type="button"
                 class="btn btn-dark w-100 "

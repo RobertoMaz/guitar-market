@@ -1,6 +1,6 @@
 <script setup>
     import { computed } from 'vue'
-
+    import { formatQuantity} from '../helpers'
 
 
     const props = defineProps({
@@ -65,7 +65,7 @@
                                                 </td>
                                                 <td>{{ product.name }}</td>
                                                 <td class="fw-bold">
-                                                        ${{ product.price }}
+                                                        {{ formatQuantity(product.price) }}
                                                 </td>
                                                 <td class="flex align-items-start gap-4">
                                                     <button
@@ -97,7 +97,7 @@
                                         </tbody>
                                     </table>
                                     
-                                    <p class="text-end">Total pagar: <span class="fw-bold">${{ totalPay }}</span></p>
+                                    <p class="text-end">Total pagar: <span class="fw-bold">{{ formatQuantity(totalPay) }}</span></p>
                                     <button 
                                         class="btn btn-dark w-100 mt-3 p-2"
                                         @click="$emit('clear-cart')"
@@ -112,7 +112,7 @@
                     <div class="col-md-6 text-center text-md-start pt-5">
                         <h2 class="display-2 fw-bold">Modelo {{guitarMain.name}}</h2>
                         <p class="mt-5 fs-5 text-white">{{ guitarMain.description }}</p>
-                        <p class="text-primary fs-1 fw-black">${{ guitarMain.price }}</p>
+                        <p class="text-primary fs-1 fw-black">{{ formatQuantity(guitarMain.price) }}</p>
                         <button 
                             type="button"
                             class="btn fs-4 bg-primary text-white py-2 px-5"
